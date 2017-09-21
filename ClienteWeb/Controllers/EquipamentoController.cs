@@ -12,6 +12,7 @@ namespace ClienteWeb.Controllers
     {
         private EquipamentoService service;
         private ClienteService clienteService;
+
         public EquipamentoController()
         {
             service = new EquipamentoService();
@@ -41,6 +42,7 @@ namespace ClienteWeb.Controllers
             var returnCliente = clienteService.Load();
 
             listCliente.AddRange(returnCliente);
+            ViewBag.StateID = new SelectList(listCliente, "Id", "Nome");
             return View();
         }
 
@@ -62,6 +64,9 @@ namespace ClienteWeb.Controllers
         // GET: Equipamento/Edit/5
         public ActionResult Edit(int id)
         {
+            var entity =  service.Load();
+            var returnCliente = clienteService.Load();
+            ViewBag.StateID = new SelectList(returnCliente, "Id", "Name", entity.StateId);
             return View();
         }
 
