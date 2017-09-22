@@ -56,7 +56,7 @@ namespace ClienteWeb.Controllers
         public ActionResult Edit(int id)
         {
             var cliente = service.Get(id);
-            return View(cliente); View();
+            return View(cliente);
         }
 
         // POST: Cliente/Edit/5

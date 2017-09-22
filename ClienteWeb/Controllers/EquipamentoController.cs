@@ -64,9 +64,9 @@ namespace ClienteWeb.Controllers
         // GET: Equipamento/Edit/5
         public ActionResult Edit(int id)
         {
-            var entity =  service.Load();
+            var entity =  service.Get(id);
             var returnCliente = clienteService.Load();
-            ViewBag.StateID = new SelectList(returnCliente, "Id", "Name", entity.StateId);
+            ViewBag.StateID = new SelectList(returnCliente, "Id", "Name", entity.ClienteId);
             return View();
         }
 
@@ -76,7 +76,7 @@ namespace ClienteWeb.Controllers
         {
             try
             {
-                //var edit = service.Get(id, entity);
+                service.Update(id, entity);
                 return RedirectToAction("Index");
             }
             catch
@@ -88,17 +88,19 @@ namespace ClienteWeb.Controllers
         // GET: Equipamento/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var entity = service.Get(id);
+
+            return View(entity);
         }
 
         // POST: Equipamento/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Equipamento entity)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                service.Delete(id);
                 return RedirectToAction("Index");
             }
             catch

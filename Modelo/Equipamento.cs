@@ -16,10 +16,19 @@ namespace Modelo
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("Id")]
         public int Id { get; set; }
-
+        
+        [Required]
         [DisplayAttribute(Name = "Modelo Equipamento")]
         [StringLength(50)]
         public string Modelo { get; set; }
+
+        [DisplayAttribute(Name = "ID Cliente")]
+        [Column("IdCliente")]
+        public int ClienteId { get; set; }
+
+        [DisplayAttribute(Name = "Nome Cliente")]
+        [ForeignKey("clienteId")]
+        public Cliente Cliente { get; set; }
 
         [DisplayAttribute(Name = "Marca Equipamento")]
         [StringLength(50)]
