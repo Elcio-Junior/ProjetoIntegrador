@@ -35,6 +35,12 @@ namespace ClienteWeb.Controllers
         // GET: Equipamento/Create
         public ActionResult Create()
         {
+            BuscarCliente();
+            return View();
+        }
+
+        private void BuscarCliente()
+        {
             Cliente Newblank = new Cliente { Id = 0, Nome = "Selecione o Cliente" };
             var listCliente = new List<Cliente>();
 
@@ -42,8 +48,8 @@ namespace ClienteWeb.Controllers
             var returnCliente = clienteService.Load();
 
             listCliente.AddRange(returnCliente);
-            ViewBag.StateID = new SelectList(listCliente, "Id", "Nome");
-            return View();
+
+            ViewBag.ClienteID = new SelectList(listCliente, "Id", "Nome");
         }
 
         // POST: Equipamento/Create
@@ -57,6 +63,8 @@ namespace ClienteWeb.Controllers
             }
             catch
             {
+                BuscarCliente();
+
                 return View();
             }
         }

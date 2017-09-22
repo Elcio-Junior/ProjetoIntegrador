@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Modelo
 {
@@ -27,7 +25,7 @@ namespace Modelo
         public int ClienteId { get; set; }
 
         [DisplayAttribute(Name = "Nome Cliente")]
-        [ForeignKey("clienteId")]
+        [ForeignKey("ClienteId")]
         public Cliente Cliente { get; set; }
 
         [DisplayAttribute(Name = "Marca Equipamento")]
@@ -42,7 +40,16 @@ namespace Modelo
         [DisplayAttribute(Name = "Ano Equipamento")]
         [DataType(DataType.DateTime)]
         [Column("Ano")]
-        public DateTime Ano { get; set; }
+        public DateTime? Ano { get; set; }
+
+        [NotMapped]
+        public string AnoString
+        {
+            get
+            {
+                return Ano.HasValue ? $"{Ano.Value.Day.ToString("00")}/{Ano.Value.ToString("MMM", CultureInfo.CreateSpecificCulture("pt-BR")).ToUpper()}" : string.Empty;
+            }
+        }
 
         //[DisplayAttribute(Name = "Data de Cadastro")]
         //[DataType(DataType.DateTime)]
