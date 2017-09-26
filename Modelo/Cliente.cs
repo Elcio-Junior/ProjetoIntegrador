@@ -16,7 +16,7 @@ namespace Modelo
         [DisplayAttribute(Name = "Cod Cliente")]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="O campo precisa ser preechido")]
         [DisplayAttribute(Name = "Nome")]
         public string Nome { get; set; }
 

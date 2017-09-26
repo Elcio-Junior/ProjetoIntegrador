@@ -20,23 +20,28 @@ namespace Modelo
         [StringLength(50)]
         public string Modelo { get; set; }
 
+        [Required]
         [DisplayAttribute(Name = "ID Cliente")]
         [Column("IdCliente")]
         public int ClienteId { get; set; }
 
+        [Required]
         [DisplayAttribute(Name = "Nome Cliente")]
         [ForeignKey("ClienteId")]
         public Cliente Cliente { get; set; }
 
+        [Required]
         [DisplayAttribute(Name = "Marca Equipamento")]
         [StringLength(50)]
         public string Marca { get; set; }
 
+        [Required]
         [DisplayAttribute(Name = "Série Equipamento")]
         [StringLength(50)]
         [Column("NumeroSerie")]
         public string Serie { get; set; }
 
+        [Required]
         [DisplayAttribute(Name = "Ano Equipamento")]
         [DataType(DataType.DateTime)]
         [Column("Ano")]
