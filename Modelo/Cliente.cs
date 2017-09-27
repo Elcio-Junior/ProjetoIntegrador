@@ -32,5 +32,7 @@ namespace Modelo
         [Required]
         [DisplayAttribute(Name = "Telefone")]
         public string Telefone { get; set; }
+
+        public virtual ICollection<Equipamento> IEquipamento { get; set; }
     }
 }
