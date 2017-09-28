@@ -22,7 +22,8 @@ namespace ClienteWeb.Controllers
         public ActionResult Index()
         {
             var lista = service.Load();
-            return View(lista);
+            var returnCliente = clienteService.Load("Id", "Nome");
+            return View();
         }
 
         // GET: Equipamento/Details/5
@@ -74,7 +75,7 @@ namespace ClienteWeb.Controllers
         {
             var entity =  service.Get(id);
             var returnCliente = clienteService.Load();
-            ViewBag.StateID = new SelectList(returnCliente, "Id", "Name", entity.ClienteId);
+            ViewBag.StateID = new SelectList(returnCliente, "Id", "Nome");
             return View();
         }
 
@@ -87,7 +88,7 @@ namespace ClienteWeb.Controllers
                 service.Update(id, entity);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception e)
             {
                 return View();
             }

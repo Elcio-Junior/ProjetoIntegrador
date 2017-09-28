@@ -26,9 +26,9 @@ namespace Modelo
         public int ClienteId { get; set; }
 
         [Required]
-        [DisplayAttribute(Name = "Nome Cliente")]
         [ForeignKey("ClienteId")]
-        public Cliente Cliente { get; set; }
+        [DisplayAttribute(Name = "Nome Cliente")]
+        public virtual Cliente Cliente { get; set; }
 
         [Required]
         [DisplayAttribute(Name = "Marca Equipamento")]
@@ -46,15 +46,6 @@ namespace Modelo
         [DataType(DataType.DateTime)]
         [Column("Ano")]
         public DateTime? Ano { get; set; }
-
-        [NotMapped]
-        public string AnoString
-        {
-            get
-            {
-                return Ano.HasValue ? $"{Ano.Value.Day.ToString("00")}/{Ano.Value.ToString("MMM", CultureInfo.CreateSpecificCulture("pt-BR")).ToUpper()}" : string.Empty;
-            }
-        }
 
         //[DisplayAttribute(Name = "Data de Cadastro")]
         //[DataType(DataType.DateTime)]

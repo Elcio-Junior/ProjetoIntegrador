@@ -1,9 +1,5 @@
 ﻿using Modelo;
 using Servico;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ClienteWeb.Controllers
@@ -11,6 +7,7 @@ namespace ClienteWeb.Controllers
     public class ClienteController : Controller
     {
         private ClienteService service;
+
 
         public ClienteController()
         {
