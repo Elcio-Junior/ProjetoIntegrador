@@ -4,6 +4,7 @@ using System.Web.Mvc;
 
 namespace ClienteWeb.Controllers
 {
+    [Authorize]
     public class ClienteController : Controller
     {
         private ClienteService service;

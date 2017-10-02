@@ -8,6 +8,7 @@ using Servico;
 
 namespace ClienteWeb.Controllers
 {
+    [Authorize]
     public class EquipamentoController : Controller
     {
         private EquipamentoService service;
@@ -22,7 +23,6 @@ namespace ClienteWeb.Controllers
         public ActionResult Index()
         {
             var lista = service.Load();
-            var returnCliente = clienteService.Load("Id", "Nome");
             return View();
         }
 
