@@ -52,6 +52,7 @@
     <Compile Include="Contexto.cs" />
     <Compile Include="EquipamentoService.cs" />
     <Compile Include="IGenericService.cs" />
+    <Compile Include="OrdemService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -194,6 +194,7 @@
     <Compile Include="Controllers\EquipamentoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -284,6 +285,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Ordem\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

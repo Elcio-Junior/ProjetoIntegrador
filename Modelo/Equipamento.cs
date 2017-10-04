@@ -43,6 +43,7 @@ namespace Modelo
 
         [Required]
         [DisplayAttribute(Name = "Ano Equipamento")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.DateTime)]
         [Column("Ano")]
         public DateTime? Ano { get; set; }

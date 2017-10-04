@@ -30,5 +30,7 @@ namespace Modelo
         public string Telefone { get; set; }
 
         public virtual ICollection<Equipamento> IEquipamento { get; set; }
+        public virtual ICollection<Ordem> IOrdem { get; set; }
+
     }
 }

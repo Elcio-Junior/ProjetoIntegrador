@@ -18,5 +18,7 @@ namespace Servico
         public DbSet<Cliente> Clientes { get; set; }
 
         public System.Data.Entity.DbSet<Modelo.Equipamento> Equipamentoes { get; set; }
+
+        public System.Data.Entity.DbSet<Modelo.Ordem> Ordems { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace ClienteWeb.Controllers
         public ActionResult Index()
         {
             var lista = service.Load();
-            return View(lista);
+            return View(lista.ToList());
         }
 
         // GET: Equipamento/Details/5
