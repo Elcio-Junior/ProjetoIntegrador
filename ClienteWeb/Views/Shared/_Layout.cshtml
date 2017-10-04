@@ -18,9 +18,10 @@
                 </button>
                 @Html.ActionLink("Peças Pel ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            @if (Request.IsAuthenticated)
+            <div class="navbar-collapse collapse">
+
+                @if (Request.IsAuthenticated)
             {
-                <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         @*<li>@Html.ActionLink("About", "About", "Home")</li>
@@ -34,16 +35,15 @@
                             </ul>
                         </li>
                     </ul>
-                </div>
-            }
-            @Html.Partial("_LoginPartial")
-
+                }
+                @Html.Partial("_LoginPartial")
+            </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer class="navbar-fixed-bottom" >
             <p>&copy; @DateTime.Now.Year - Projeto Integrador em ASP.NET Application</p>
         </footer>
     </div>
