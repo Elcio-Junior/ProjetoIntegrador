@@ -282,10 +282,13 @@
     <Content Include="Views\Equipamento\Delete.cshtml" />
     <Content Include="Views\Equipamento\Index.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Ordem\Index.cshtml" />
+    <Content Include="Views\Ordem\Details.cshtml" />
+    <Content Include="Views\Ordem\Create.cshtml" />
+    <Content Include="Views\Ordem\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Ordem\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

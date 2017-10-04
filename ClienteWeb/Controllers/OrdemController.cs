@@ -1,52 +1,56 @@
-﻿using Modelo;
-using Servico;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
+using Modelo;
+using Servico;
 
 namespace ClienteWeb.Controllers
 {
-    [Authorize]
     public class OrdemController : Controller
     {
         private Contexto db = new Contexto();
+
         private EquipamentoService equipamentoService;
         private ClienteService clienteService;
-        private OrdemService service;
-        
+        private OrdemService ordemService;
+
         public OrdemController()
         {
             equipamentoService = new EquipamentoService();
             clienteService = new ClienteService();
-            service = new OrdemService();
+            ordemService = new OrdemService();
         }
 
         // GET: Ordem
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             //var ordems = db.Ordems.Include(o => o.cliente);
-            //return View(await ordems.ToListAsync());
-
-
-            var  lista = service.Load();
-            return View( lista.ToList());
+            //return View(ordems.ToList());
+            var lista = ordemService.Load();
+            return View(lista.ToList());
         }
 
         // GET: Ordem/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Ordem ordem = await db.Ordems.FindAsync(id);
-            if (ordem == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ordem);
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Ordem ordem = db.Ordems.Find(id);
+            //if (ordem == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(ordem);
+            var list = ordemService.Get(id);
+            return View(list);
+
         }
 
         // GET: Ordem/Create
@@ -57,16 +61,14 @@ namespace ClienteWeb.Controllers
         }
 
         // POST: Ordem/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,NumeroOS,DtAberturaOs,DtFechamentoOS,Status,ClienteId")] Ordem ordem)
+        public ActionResult Create([Bind(Include = "Id,NumeroOS,DtAberturaOs,DtFechamentoOS,Status,ClienteId")] Ordem ordem)
         {
             if (ModelState.IsValid)
             {
                 db.Ordems.Add(ordem);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -75,13 +77,13 @@ namespace ClienteWeb.Controllers
         }
 
         // GET: Ordem/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ordem ordem = await db.Ordems.FindAsync(id);
+            Ordem ordem = db.Ordems.Find(id);
             if (ordem == null)
             {
                 return HttpNotFound();
@@ -95,12 +97,12 @@ namespace ClienteWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,NumeroOS,DtAberturaOs,DtFechamentoOS,Status,ClienteId")] Ordem ordem)
+        public ActionResult Edit([Bind(Include = "Id,NumeroOS,DtAberturaOs,DtFechamentoOS,Status,ClienteId")] Ordem ordem)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(ordem).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome", ordem.ClienteId);
@@ -108,13 +110,13 @@ namespace ClienteWeb.Controllers
         }
 
         // GET: Ordem/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ordem ordem = await db.Ordems.FindAsync(id);
+            Ordem ordem = db.Ordems.Find(id);
             if (ordem == null)
             {
                 return HttpNotFound();
@@ -125,11 +127,11 @@ namespace ClienteWeb.Controllers
         // POST: Ordem/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Ordem ordem = await db.Ordems.FindAsync(id);
+            Ordem ordem = db.Ordems.Find(id);
             db.Ordems.Remove(ordem);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 

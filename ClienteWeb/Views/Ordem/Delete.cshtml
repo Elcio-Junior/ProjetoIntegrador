@@ -1,0 +1,63 @@
+﻿@model Modelo.Ordem
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Deletar</h2>
+
+<div>
+    <h4>Ordem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroOS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroOS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DtAberturaOs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DtAberturaOs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DtFechamentoOS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DtFechamentoOS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClienteId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar", "Index")
+        </div>
+    }
+</div>
