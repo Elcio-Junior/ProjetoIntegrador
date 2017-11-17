@@ -12,7 +12,7 @@ namespace Modelo
         [Key]
         [DisplayAttribute(Name = "Cod Equipamento")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("Id")]
+        [Column("EquipamentoId")]
         public int Id { get; set; }
         
         [Required]
@@ -21,19 +21,16 @@ namespace Modelo
         public string Modelo { get; set; }
 
         [Required]
-        [DisplayAttribute(Name = "ID Cliente")]
-        [Column("IdCliente")]
-        public int ClienteId { get; set; }
-
-        [Required]
-        [ForeignKey("ClienteId")]
-        [DisplayAttribute(Name = "Nome Cliente")]
-        public virtual Cliente Cliente { get; set; }
-
-        [Required]
         [DisplayAttribute(Name = "Marca Equipamento")]
         [StringLength(50)]
         public string Marca { get; set; }
+
+        [Required]
+        [DisplayAttribute(Name = "Ano Equipamento")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.DateTime)]
+        [Column("Ano")]
+        public DateTime? Ano { get; set; }
 
         [Required]
         [DisplayAttribute(Name = "Série Equipamento")]
@@ -42,11 +39,14 @@ namespace Modelo
         public string Serie { get; set; }
 
         [Required]
-        [DisplayAttribute(Name = "Ano Equipamento")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DataType(DataType.DateTime)]
-        [Column("Ano")]
-        public DateTime? Ano { get; set; }
+        [Column("ClienteId")]
+        public int ClienteId { get; set; }
+
+        [Required]
+        [ForeignKey("ClienteId")]
+        [DisplayAttribute(Name = "Nome Cliente")]
+        public virtual Cliente Cliente { get; set; }
+
 
         //[DisplayAttribute(Name = "Data de Cadastro")]
         //[DataType(DataType.DateTime)]

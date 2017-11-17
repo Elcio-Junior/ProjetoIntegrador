@@ -13,11 +13,6 @@ namespace Modelo
         [Column("Id")]
         public int Id { get; set; }
 
-        [Required]
-        [DisplayAttribute(Name = "Numero da OS")]
-        [StringLength(50)]
-        public string NumeroOS { get; set; }
-
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.DateTime)]
         [DisplayAttribute(Name = "Abertura OS")]

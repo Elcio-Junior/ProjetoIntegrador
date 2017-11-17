@@ -8,8 +8,9 @@ namespace Modelo
     public partial class Cliente : IModel<int>
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [DisplayAttribute(Name = "Cod Cliente")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("ClienteId")]
         public int Id { get; set; }
 
         [Required(ErrorMessage ="O campo precisa ser preechido")]
@@ -29,8 +30,8 @@ namespace Modelo
         [DisplayAttribute(Name = "Telefone")]
         public string Telefone { get; set; }
 
-        public virtual ICollection<Equipamento> IEquipamento { get; set; }
-        public virtual ICollection<Ordem> IOrdem { get; set; }
+        public virtual ICollection<Equipamento> Equipamentos { get; set; }
+        public virtual ICollection<Ordem> Ordens { get; set; }
 
     }
 }
