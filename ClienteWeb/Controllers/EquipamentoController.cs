@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,7 +23,9 @@ namespace ClienteWeb.Controllers
         // GET: Equipamento
         public ActionResult Index()
         {
-            var lista = service.Load();
+            var lista = service.Load().Include(x => x.Cliente);
+            //var clienteResult = clienteService.Get(x=> x.Id == lista.)
+
             return View(lista);
         }
 

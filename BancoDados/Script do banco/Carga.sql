@@ -29,8 +29,6 @@ INSERT INTO OrdemItem (OrdemId, ServicoId, Valor, Quantidade)
            
 GO
 
-update Cliente where ClienteId
-
 select *From Cliente
 select *From Equipamento
 select *From Ordem
