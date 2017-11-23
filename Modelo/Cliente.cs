@@ -18,7 +18,7 @@ namespace Modelo
         public string Nome { get; set; }
 
         [Required]
-        [DisplayAttribute(Name = "Numero CPF")]
+        [DisplayAttribute(Name = "CPF")]
         //[ValidationCPF]
         public string Documento { get; set; }
 

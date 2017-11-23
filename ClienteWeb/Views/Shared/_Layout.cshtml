@@ -79,16 +79,31 @@
                         <small>@ViewBag.Subtitle</small>
                     </h1>
                 </section>
-
+                <!-- Main content -->
+                <section class="content">
+                    @RenderBody()
+                </section>
                 <!-- /.content -->
             </div>
         }
-        <!-- Main content -->
-        <div class="content-wrapper">
-            <section class="content">
-                @RenderBody()
-            </section>
-        </div>
+        else
+        {
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        @ViewBag.Title
+                        <small>@ViewBag.Subtitle</small>
+                    </h1>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+                    @RenderBody()
+                </section>
+                <!-- /.content -->
+            </div>
+        }
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="pull-right hidden-xs">

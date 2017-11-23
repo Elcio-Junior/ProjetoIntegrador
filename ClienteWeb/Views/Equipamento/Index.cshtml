@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Modelo.Equipamento>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Equipamentos";
+    ViewBag.Subtitle = "Equipamentos Cadastrados";
+
 }
 
-<h2>Equipamentos</h2>
-
 <p>
-    @Html.ActionLink("Criar novo Equipamento", "Create")
+    @Html.ActionLink("Novo", "Create")
 </p>
 <table class="table">
     <tr>

@@ -1,16 +1,12 @@
 ﻿@model IEnumerable<Modelo.Cliente>
 
 @{
-    ViewBag.Title = "Index";
-}
-<link href="~/assets/css/please-wait.css" rel="stylesheet" />
-<script src="~/assets/js/please-wait.min.js"></script>
-<script src="~/assets/js/modernizr.js"></script>
-<script src="~/assets/js/jquery.js"></script>
-<h2>Clientes</h2>
+    ViewBag.Title = "Clientes";
+    ViewBag.Subtitle = "Clientes do sistema";
 
+}
 <p>
-    @Html.ActionLink("Cadastrar novo cliente", "Create")
+    @Html.ActionLink("Novo", "Create")
 </p>
 <table class="table">
     <tr>
