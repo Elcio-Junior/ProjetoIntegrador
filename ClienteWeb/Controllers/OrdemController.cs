@@ -56,23 +56,29 @@ namespace ClienteWeb.Controllers
         // GET: Ordem/Create
         public ActionResult Create()
         {
+
             ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome");
+            ViewBag.EquipamentoID = new SelectList(db.Equipamentos, "Id", "Modelo");
+
             return View();
         }
 
         // POST: Ordem/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,NumeroOS,DtAberturaOs,DtFechamentoOS,Status,ClienteId")] Ordem ordem)
+        public ActionResult Create([Bind(Include = "OrdemId,Descricao,ClienteId,EquipamentoID")] Ordem ordem)
         {
             if (ModelState.IsValid)
             {
+                ordem.Abertura = DateTime.Now;
                 db.Ordens.Add(ordem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome", ordem.ClienteId);
+            ViewBag.EquipamentoID = new SelectList(db.Equipamentos, "Id", "Modelo", ordem.EquipamentoId);
+
             return View(ordem);
         }
 
