@@ -9,17 +9,11 @@ namespace Modelo
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [DisplayAttribute(Name = "Cod Cliente")]
+        [Column("ClienteId")]
         public int Id { get; set; }
 
         [Required(ErrorMessage ="O campo precisa ser preechido")]
-        [DisplayAttribute(Name = "Nome")]
         public string Nome { get; set; }
-
-        [Required]
-        [DisplayAttribute(Name = "Numero CPF")]
-        //[ValidationCPF]
-        public string Documento { get; set; }
 
         [Required]
         [DisplayAttribute(Name = "Endereço")]
@@ -29,8 +23,11 @@ namespace Modelo
         [DisplayAttribute(Name = "Telefone")]
         public string Telefone { get; set; }
 
-        public virtual ICollection<Equipamento> IEquipamento { get; set; }
-        public virtual ICollection<Ordem> IOrdem { get; set; }
+        public string CNPJ{ get; set; }
 
+        public string CPF { get; set; }
+
+        // Cliente pode ter Coleção de Equipamentos 
+        public virtual ICollection<Equipamento> Equipamentos { get; set; }
     }
 }

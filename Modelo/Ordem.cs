@@ -10,36 +10,33 @@ namespace Modelo
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("Id")]
+        [Column("OrdemId")]
         public int Id { get; set; }
 
-        [Required]
-        [DisplayAttribute(Name = "Numero da OS")]
-        [StringLength(50)]
-        public string NumeroOS { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.DateTime)]
+        public DateTime Abertura { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.DateTime)]
-        [DisplayAttribute(Name = "Abertura OS")]
-        public DateTime DtAberturaOs { get; set; }
+        public DateTime? Fechamento { get; set; }
 
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DataType(DataType.DateTime)]
-        [DisplayAttribute(Name = "Fechamento OS")]
-        public DateTime DtFechamentoOS { get; set; }
+        [DisplayAttribute(Name = "Descrição")]
+        public string Descricao { get; set; }
 
-        [DisplayAttribute(Name = "Status")]
-        [StringLength(10)]
-        public string Status { get; set; }
-
-        [Required]
-
-        [Column("IdCliente")]
+        #region Relacionamentos
+        // Relacionamento Tabela Cliente
         public virtual int ClienteId { get; set; }
 
-        [DisplayAttribute(Name = "Nome Cliente")]
         [ForeignKey("ClienteId")]
-        public Cliente cliente { get; set; }
+        public virtual Cliente Cliente { get; set; }
 
+        // Relacionamento Tabela Equipamento
+        public int EquipamentoId { get; set; }
+
+        [ForeignKey("EquipamentoId")]
+        public virtual Equipamento Equipamento { get; set; }
+
+        #endregion
     }
 }

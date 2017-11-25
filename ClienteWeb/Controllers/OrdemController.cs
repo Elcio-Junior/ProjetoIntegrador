@@ -31,8 +31,8 @@ namespace ClienteWeb.Controllers
         {
             //var ordems = db.Ordems.Include(o => o.cliente);
             //return View(ordems.ToList());
-            var lista = ordemService.Load();
-            return View(lista.ToList());
+            var lista = ordemService.Load().Include(x => x.Cliente).Include(x=>x.Equipamento);
+            return View(lista);
         }
 
         // GET: Ordem/Details/5

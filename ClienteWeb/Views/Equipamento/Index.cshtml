@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Modelo.Equipamento>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Equipamentos";
+    ViewBag.Subtitle = "Equipamentos Cadastrados";
+
 }
 
-<h2>Equipamentos</h2>
-
 <p>
-    @Html.ActionLink("Criar novo Equipamento", "Create")
+    @Html.ActionLink("Novo", "Create")
 </p>
 <table class="table">
     <tr>
@@ -21,7 +21,10 @@
             @Html.DisplayNameFor(model => model.Marca)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Serie)
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroSerie)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Ano)
@@ -41,7 +44,10 @@
             @Html.DisplayFor(modelItem => item.Marca)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Serie)
+            @Html.DisplayFor(modelItem => item.Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroSerie)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Ano)

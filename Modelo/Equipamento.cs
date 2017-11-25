@@ -10,47 +10,34 @@ namespace Modelo
     public class Equipamento : IModel<int>
     {
         [Key]
-        [DisplayAttribute(Name = "Cod Equipamento")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("Id")]
+        [Column("EquipamentoId")]
         public int Id { get; set; }
-        
+
         [Required]
-        [DisplayAttribute(Name = "Modelo Equipamento")]
         [StringLength(50)]
         public string Modelo { get; set; }
 
         [Required]
-        [DisplayAttribute(Name = "ID Cliente")]
-        [Column("IdCliente")]
-        public int ClienteId { get; set; }
+        public string Tipo { get; set; }
 
         [Required]
-        [ForeignKey("ClienteId")]
-        [DisplayAttribute(Name = "Nome Cliente")]
-        public virtual Cliente Cliente { get; set; }
-
-        [Required]
-        [DisplayAttribute(Name = "Marca Equipamento")]
-        [StringLength(50)]
         public string Marca { get; set; }
 
         [Required]
-        [DisplayAttribute(Name = "Série Equipamento")]
-        [StringLength(50)]
-        [Column("NumeroSerie")]
-        public string Serie { get; set; }
+        public int Ano { get; set; }
 
         [Required]
-        [DisplayAttribute(Name = "Ano Equipamento")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DataType(DataType.DateTime)]
-        [Column("Ano")]
-        public DateTime? Ano { get; set; }
+        [DisplayAttribute(Name = " Nª Série")]
+        public string NumeroSerie { get; set; }
 
-        //[DisplayAttribute(Name = "Data de Cadastro")]
-        //[DataType(DataType.DateTime)]
-        //[Column("Ano")]
-        //public DateTime DtCadastro { get; set; }
+        #region Relacionamentos
+        // Relacionamento Tabela Cliente
+        public int ClienteId { get; set; }
+
+        [ForeignKey("ClienteId")]
+        public virtual Cliente Cliente { get; set; }
+        
+        #endregion
     }
 }

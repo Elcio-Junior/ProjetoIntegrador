@@ -52,8 +52,11 @@
     <Compile Include="Contexto.cs" />
     <Compile Include="EquipamentoService.cs" />
     <Compile Include="IGenericService.cs" />
+    <Compile Include="OrdemItemService.cs" />
     <Compile Include="OrdemService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicoService.cs" />
+    <Compile Include="TipoServicoService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

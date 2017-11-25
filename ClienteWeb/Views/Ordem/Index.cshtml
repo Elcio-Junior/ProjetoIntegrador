@@ -1,30 +1,28 @@
 ﻿@model IEnumerable<Modelo.Ordem>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "OS";
 }
 
-<h2>Ordem de Serviço</h2>
-
 <p>
-    @Html.ActionLink("Nova OS", "Create")
+    @Html.ActionLink("Novo", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.cliente.Nome)
+            @Html.DisplayNameFor(model => model.Id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NumeroOS)
+            @Html.DisplayNameFor(model => model.Cliente.Nome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DtAberturaOs)
+            @Html.DisplayNameFor(model => model.Descricao)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DtFechamentoOS)
+            @Html.DisplayNameFor(model => model.Abertura)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.Equipamento.Modelo)
         </th>
         <th></th>
     </tr>
@@ -32,19 +30,19 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ClienteId)
+            @Html.DisplayFor(modelItem => item.Id)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.NumeroOS)
+            @Html.DisplayFor(modelItem => item.Cliente.Nome)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DtAberturaOs)
+            @Html.DisplayFor(modelItem => item.Descricao)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DtFechamentoOS)
+            @Html.DisplayFor(modelItem => item.Abertura)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Status)
+            @Html.DisplayFor(modelItem => item.Equipamento.Modelo)
         </td>
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
