@@ -9,7 +9,7 @@ namespace Modelo
         [Column("OrdemItemId")]
         public int Id { get; set; }
 
-        public float Valor { get; set; }
+        public double Valor { get; set; }
 
         public int Quantidade { get; set; }
 
@@ -23,7 +23,7 @@ namespace Modelo
         // Relacionamento Tabela Servico
         public int ServicoId { get; set; }
 
-        [DisplayAttribute(Name = "Descrição")]
+        //[DisplayAttribute(Name = "Descrição")]
         [ForeignKey("ServicoId")]
         public virtual ServicoP ServicoP { get; set; }
         

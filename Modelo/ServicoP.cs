@@ -10,19 +10,23 @@ namespace Modelo
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("ServicoId")]
         public int Id { get; set; }
+
         [Required]
+        [DisplayAttribute(Name = "Descrição")]
         public string Descricao { get; set; }
 
         [Required]
-        public float Valor { get; set; }
+        public double Valor { get; set; }
 
         #region Relacionamentos
+
         // Realacionamento Tabela TipoServico
         [Required]
-        public string TipoServicoId { get; set; }
+        public int TipoServicoId { get; set; }
 
         [ForeignKey("TipoServicoId")]
         public virtual TipoServico TipoServico { get; set; }
+
         #endregion
     }
 }

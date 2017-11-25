@@ -17,8 +17,14 @@ namespace Servico
 
         public DbSet<Cliente> Clientes { get; set; }
 
-        public System.Data.Entity.DbSet<Modelo.Equipamento> Equipamentoes { get; set; }
+        public DbSet<Equipamento> Equipamentoes { get; set; }
 
-        public System.Data.Entity.DbSet<Modelo.Ordem> Ordems { get; set; }
+        public DbSet<Ordem> Ordens { get; set; }
+
+        public DbSet<OrdemItem> OrdemItens { get; set; }
+
+        public DbSet<TipoServico> TipoServicos { get; set; }
+
+        public DbSet<ServicoP> Servicos { get; set; }
     }
 }

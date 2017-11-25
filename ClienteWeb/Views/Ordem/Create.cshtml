@@ -1,10 +1,9 @@
 ﻿@model Modelo.Ordem
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Ordem de Serviço";
+    ViewBag.Subtitle = "Nova";
 }
-
-<h2>Nova Ordem</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,52 +11,59 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Ordem</h4>
-        <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.NumeroOS, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NumeroOS, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NumeroOS, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DtAberturaOs, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DtAberturaOs, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DtAberturaOs, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.Abertura, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Abertura, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Abertura, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DtFechamentoOS, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DtFechamentoOS, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DtFechamentoOS, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+        @*<div class="input-group date" data-provide="datepicker">
+            <input type="text" class="form-control">
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.cliente, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ClienteId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ClienteId, "", new { @class = "text-danger" })
-            </div>
+        @*<div class="form-group">
+        @Html.LabelFor(model => model.DtFechamentoOS, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DtFechamentoOS, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DtFechamentoOS, "", new { @class = "text-danger" })
         </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.cliente, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("ClienteId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ClienteId, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Inserir" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -69,4 +75,32 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+<script type="text/javascript" language="javascript">
+            $(function () {
+
+
+                //$('.datepicker').datepicker();
+
+
+                $('input[type=datetime]').datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                    dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                    nextText: 'Proximo',
+                    prevText: 'Anterior',
+                    showOn: "button"
+                }).css("display", "inline-block")
+                    .next("button").button({
+                        icons: { primary: "ui-icon-calendar" },
+                        label: "Selecione uma data",
+                        text: false
+                    });
+            });
+</script>
+
+
 }

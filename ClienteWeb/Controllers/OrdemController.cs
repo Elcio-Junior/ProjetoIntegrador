@@ -67,7 +67,7 @@ namespace ClienteWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Ordems.Add(ordem);
+                db.Ordens.Add(ordem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -83,7 +83,7 @@ namespace ClienteWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ordem ordem = db.Ordems.Find(id);
+            Ordem ordem = db.Ordens.Find(id);
             if (ordem == null)
             {
                 return HttpNotFound();
@@ -116,7 +116,7 @@ namespace ClienteWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ordem ordem = db.Ordems.Find(id);
+            Ordem ordem = db.Ordens.Find(id);
             if (ordem == null)
             {
                 return HttpNotFound();
@@ -129,8 +129,8 @@ namespace ClienteWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Ordem ordem = db.Ordems.Find(id);
-            db.Ordems.Remove(ordem);
+            Ordem ordem = db.Ordens.Find(id);
+            db.Ordens.Remove(ordem);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
