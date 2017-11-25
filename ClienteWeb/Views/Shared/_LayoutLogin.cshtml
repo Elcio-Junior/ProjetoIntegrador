@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="~/assets/css/please-wait.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/all.css" rel="stylesheet" />
+
+    <script src="~/assets/js/please-wait.min.js"></script>
+    <script src="~/assets/js/modernizr.js"></script>
+    <script src="~/assets/js/jquery.js"></script>
+    
+</head>
+
+<body class="hold-transition login-page">
+
+    @RenderBody()
+
+
+
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/assets/css/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/assets/css/skin-blue.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/iCheck/flat/blue.css" rel="stylesheet" />
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/jquery.validate.min.js"></script>
+    <script src="~/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="~/assets/plugins/fastclick/fastclick.min.js"></script>
+    <script src="~/assets/js/app.min.js"></script>
+    <script src="~/assets/js/demo.js"></script>
+    <script src="~/assets/js/AdminLTE.js"></script>
+    <script src="~/assets/plugins/iCheck/icheck.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('input[type="radio"]')
+                .iCheck({
+                    checkboxClass: 'icheckbox_flat-blue',
+                    radioClass: 'iradio_flat-blue',
+                    increaseArea: '20%' // optional
+                });
+
+            $('input[type="checkbox"]:not(.bootstrap-switch)')
+                .iCheck({
+                    checkboxClass: 'icheckbox_flat-blue',
+                    radioClass: 'iradio_flat-blue',
+                    increaseArea: '20%' // optional
+                });  
+
+        })
+    </script>
+
+
+    @RenderSection("scripts", required: false)
+    @{
+        if (ViewBag.Erro != null)
+        {
+            foreach (var m in (List<string>)ViewBag.Erro)
+            {
+                <script>
+                    MsgErro('@m');
+                </script>
+            }
+        }
+
+        if (ViewBag.Ok != null)
+        {
+            foreach (var m in (List<string>)ViewBag.Ok)
+            {
+                <script>
+                    MsgOk('@m');
+                </script>
+            }
+        }
+
+        if (ViewBag.Info != null)
+        {
+            foreach (var m in (List<string>)ViewBag.Info)
+            {
+                <script>
+                    MsgInfo('@m');
+                </script>
+            }
+        }
+
+        if (ViewBag.Alerta != null)
+        {
+            foreach (var m in (List<string>)ViewBag.Alerta)
+            {
+                <script>
+                    MsgAlerta('@m');
+                </script>
+            }
+        }
+
+    }
+</body>
+</html>
