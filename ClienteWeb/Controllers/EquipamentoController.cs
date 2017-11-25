@@ -78,8 +78,8 @@ namespace ClienteWeb.Controllers
         {
             var entity =  service.Get(id);
             var returnCliente = clienteService.Load();
-            ViewBag.StateID = new SelectList(returnCliente, "Id", "Nome");
-            return View();
+            ViewBag.ClienteID = new SelectList(returnCliente, "Id", "Nome",entity.ClienteId);
+            return View(entity);
         }
 
         // POST: Equipamento/Edit/5
@@ -107,7 +107,7 @@ namespace ClienteWeb.Controllers
 
         // POST: Equipamento/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, Equipamento entity)
+        public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {

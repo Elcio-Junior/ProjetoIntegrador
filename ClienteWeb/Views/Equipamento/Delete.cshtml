@@ -1,13 +1,10 @@
 ﻿@model Modelo.Equipamento
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Equipamentos";
+    ViewBag.Subtitle = "Deletar";
 }
-
-<h2>Deletar</h2>
-
 <div>
-    <h4>Equipamento</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,19 +16,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ClienteId)
+            @Html.DisplayNameFor(model => model.Cliente.Nome)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ClienteId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cliente)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cliente)
+            @Html.DisplayFor(model => model.Cliente.Nome)
         </dd>
 
         <dt>
@@ -43,11 +32,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Serie)
+            @Html.DisplayNameFor(model => model.NumeroSerie)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Serie)
+            @Html.DisplayFor(model => model.NumeroSerie)
         </dd>
 
         <dt>
@@ -60,12 +49,14 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
-
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Voltar", "Index")
+        </div>
+        <div class=" col-md-1">
+            <input type="submit" value="Delete" class="btn btn-block btn-danger" />
         </div>
     }
 </div>
