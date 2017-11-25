@@ -37,6 +37,8 @@ namespace Modelo
         [ForeignKey("EquipamentoId")]
         public virtual Equipamento Equipamento { get; set; }
 
+        public virtual ICollection<OrdemItem> Itens { get; set; }
+
         #endregion
     }
 }

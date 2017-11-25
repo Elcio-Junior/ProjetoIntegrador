@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Modelo.Ordem>
 
 @{
-    ViewBag.Title = "OS";
+    ViewBag.Title = "Ordem de Serviços";
 }
 
 <p>
-    @Html.ActionLink("Novo", "Create")
+    @Html.ActionLink("Nova", "Create")
 </p>
 <table class="table">
     <tr>
@@ -20,6 +20,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Abertura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fechamento)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Equipamento.Modelo)
@@ -40,6 +43,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Abertura)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fechamento)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Equipamento.Modelo)

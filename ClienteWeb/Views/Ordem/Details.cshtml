@@ -1,58 +1,108 @@
 ﻿@model Modelo.Ordem
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Ordem de Serviço";
+    ViewBag.Subtitle = "Detalhes";
 }
 
-<h2>Detalhes</h2>
-
 <div>
-    <h4>Ordem</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.NumeroOS)
+            @Html.DisplayNameFor(model => model.Id)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NumeroOS)
+            @Html.DisplayFor(model => model.Id)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DtAberturaOs)
+            @Html.DisplayNameFor(model => model.Cliente.Nome)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DtAberturaOs)
+            @Html.DisplayFor(model => model.Cliente.Nome)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DtFechamentoOS)
+            @Html.DisplayNameFor(model => model.Descricao)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DtFechamentoOS)
+            @Html.DisplayFor(model => model.Descricao)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.Abertura)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Status)
+            @Html.DisplayFor(model => model.Fechamento)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.cliente.Nome)
+            @Html.DisplayNameFor(model => model.Fechamento)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.cliente.Nome)
+            @Html.DisplayFor(model => model.Abertura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Equipamento.Modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Equipamento.Modelo)
         </dd>
 
     </dl>
+
+    <h3>Itens</h3>
+
+    <table class="table">
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Descrição
+            </th>
+            <th>
+                Quantidade
+            </th>
+            <th>
+                Valor
+            </th>
+            <th>
+                Total
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Itens)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServicoP.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServicoP.Valor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+            </tr>
+        }
+
+    </table>
+
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Voltar", "Index")
 </p>

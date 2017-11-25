@@ -6,9 +6,12 @@
     <title>@ViewBag.Title</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link href="~/assets/css/please-wait.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/all.css" rel="stylesheet" />
+
     <script src="~/assets/js/please-wait.min.js"></script>
     <script src="~/assets/js/modernizr.js"></script>
     <script src="~/assets/js/jquery.js"></script>
+    
     <!--[if lt IE 9]>
     <script src="~/assets/js/html5shiv.min.js"></script>
     <script src="~/assets/js/respond.min.js"></script>
@@ -126,6 +129,9 @@
     <script src="~/assets/js/demo.js"></script>
     <script src="~/assets/js/AdminLTE.js"></script>
     <script src="~/assets/plugins/iCheck/icheck.min.js"></script>
+    @*<script src="~/Scripts/jquery-ui.min.js"></script>*@
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $('input[type="radio"]')
@@ -141,6 +147,9 @@
                     radioClass: 'iradio_flat-blue',
                     increaseArea: '20%' // optional
                 });
+
+           
+
         })
     </script>
     @RenderSection("scripts", required: false)
