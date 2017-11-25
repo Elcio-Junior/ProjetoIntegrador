@@ -25,8 +25,8 @@ namespace ClienteWeb.Controllers
         // GET: Cliente/Details/5
         public ActionResult Details(int id)
         {
-            var cliente = service.Get(id);
-            return View(cliente);
+            var result = service.Get(id);
+            return View(result);
         }
 
         // GET: Cliente/Create
@@ -53,8 +53,8 @@ namespace ClienteWeb.Controllers
         // GET: Cliente/Edit/5
         public ActionResult Edit(int id)
         {
-            var cliente = service.Get(id);
-            return View(cliente);
+            var result = service.Get(id);
+            return View(result);
         }
 
         // POST: Cliente/Edit/5
@@ -75,8 +75,8 @@ namespace ClienteWeb.Controllers
         // GET: Cliente/Delete/5
         public ActionResult Delete(int id)
         {
-            var cliente = service.Get(id);
-            return View(cliente);
+            var result = service.Get(id);
+            return View(result);
         }
 
         // POST: Cliente/Delete/5

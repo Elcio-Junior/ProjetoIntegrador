@@ -36,6 +36,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -49,15 +52,19 @@
   <ItemGroup>
     <Compile Include="Cliente.cs" />
     <Compile Include="Equipamento.cs" />
+    <Compile Include="Helpers\BrazilianDateTimeConverter.cs" />
     <Compile Include="IModel.cs" />
     <Compile Include="Ordem.cs" />
+    <Compile Include="OrdemItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Servico.cs" />
+    <Compile Include="ServicoP.cs" />
+    <Compile Include="TipoServico.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
