@@ -17,7 +17,7 @@ namespace Servico
 
         public DbSet<Cliente> Clientes { get; set; }
 
-        public DbSet<Equipamento> Equipamentoes { get; set; }
+        public DbSet<Equipamento> Equipamentos { get; set; }
 
         public DbSet<Ordem> Ordens { get; set; }
 
