@@ -29,6 +29,14 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fechamento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Fechamento, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Fechamento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
 
         @*<div class="input-group date" data-provide="datepicker">
             <input type="text" class="form-control">
@@ -82,6 +90,12 @@
 
                 //$('.datepicker').datepicker();
 
+                //$('#sandbox-container .input-group.date').datepicker({
+                //});
+
+                //$('#datepicker').datepicker({
+                //    autoclose: true
+                //})
 
                 $('input[type=datetime]').datepicker({
                     dateFormat: 'dd/mm/yy',
@@ -91,14 +105,14 @@
                     monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
                     monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
                     nextText: 'Proximo',
-                    prevText: 'Anterior',
-                    showOn: "button"
-                }).css("display", "inline-block")
-                    .next("button").button({
-                        icons: { primary: "ui-icon-calendar" },
-                        label: "Selecione uma data",
-                        text: false
-                    });
+                    prevText: 'Anterior'
+                })
+                //.css("display", "inline-block")
+                //    .next("button").button({
+                //        icons: { primary: "ui-icon-calendar" },
+                //        label: "Selecione uma data",
+                //        text: false
+                //    });
             });
 </script>
 
