@@ -133,6 +133,10 @@
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
 
     <script>
+
+        var urlOrdem = "";
+        var urlOrdemItem = "";
+
         $(document).ready(function () {
             $('input[type="radio"]')
                 .iCheck({
@@ -148,9 +152,11 @@
                     increaseArea: '20%' // optional
                 });
 
-           
+            urlOrdem = '@Url.Action("", "Ordem")';
+            urlOrdemItem = '@Url.Action("", "OrdemItem")';
 
         })
+
     </script>
     @RenderSection("scripts", required: false)
     @{

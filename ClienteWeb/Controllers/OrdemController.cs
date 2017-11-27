@@ -38,63 +38,74 @@ namespace ClienteWeb.Controllers
         // GET: Ordem/Details/5
         public ActionResult Details(int id)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //Ordem ordem = db.Ordems.Find(id);
-            //if (ordem == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(ordem);
             var list = ordemService.Get(id);
             return View(list);
-
         }
 
         // GET: Ordem/Create
         public ActionResult Create()
         {
-
             ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome");
-            ViewBag.EquipamentoID = new SelectList(db.Equipamentos, "Id", "Modelo");
+            ViewBag.EquipamentoId = new SelectList(db.Equipamentos, "Id", "Modelo");
+            ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
 
             return View();
+        }
+
+        //private void CarregarViewBag(int clienteId)
+        //{
+        //    var equipamentos = db.Equipamentos.Where(n => n.ClienteId == clienteId).ToList();
+
+        //    ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome");
+        //    ViewBag.EquipamentoId = new SelectList(equipamentos, "Id", "Modelo");
+        //    ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
+        //}
+
+        public JsonResult ListaEquipamentos(int clienteId)
+        {
+            //var telefones = (from u in model.telefones where u.ClienteID select u.telefone).toList(); //Nesse caso estou usando uma tabela ficticia com os telefones do cliente cadastrado
+
+            var equipamentos = db.Equipamentos.Where(n => n.ClienteId == clienteId).ToList();
+
+            return Json(equipamentos, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Ordem/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrdemId,Descricao,ClienteId,EquipamentoID")] Ordem ordem)
+        public ActionResult Create(Ordem ordem)
         {
-            if (ModelState.IsValid)
+            if (ordem?.Id == 0)
             {
                 ordem.Abertura = DateTime.Now;
                 db.Ordens.Add(ordem);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", new { id = ordem.Id });
             }
 
             ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome", ordem.ClienteId);
-            ViewBag.EquipamentoID = new SelectList(db.Equipamentos, "Id", "Modelo", ordem.EquipamentoId);
+            ViewBag.EquipamentoId = new SelectList(db.Equipamentos, "Id", "Modelo", ordem.EquipamentoId);
+            ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
 
-            return View(ordem);
+            //return Json(new { Resultado = ordem.Id }, JsonRequestBehavior.AllowGet);
+
+            return View();
         }
 
         // GET: Ordem/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Ordem ordem = db.Ordens.Find(id);
+
             if (ordem == null)
             {
                 return HttpNotFound();
             }
+
             ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome", ordem.ClienteId);
+            ViewBag.EquipamentoId = new SelectList(db.Equipamentos, "Id", "Modelo", ordem.EquipamentoId);
+            ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
+
             return View(ordem);
         }
 
@@ -103,15 +114,23 @@ namespace ClienteWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,NumeroOS,DtAberturaOs,DtFechamentoOS,Status,ClienteId")] Ordem ordem)
+        public ActionResult Edit(Ordem ordem)
         {
-            if (ModelState.IsValid)
+            var item = db.Ordens.Find(ordem.Id);
+
+            if (ModelState.IsValid && item != null)
             {
-                db.Entry(ordem).State = EntityState.Modified;
+                item.ClienteId = ordem.ClienteId;
+                item.EquipamentoId = ordem.EquipamentoId;
+                item.Descricao = ordem.Descricao;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
             }
+
             ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome", ordem.ClienteId);
+            ViewBag.EquipamentoId = new SelectList(db.Equipamentos, "Id", "Modelo", ordem.EquipamentoId);
+            ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
+
             return View(ordem);
         }
 
@@ -122,11 +141,14 @@ namespace ClienteWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Ordem ordem = db.Ordens.Find(id);
+
             if (ordem == null)
             {
                 return HttpNotFound();
             }
+            
             return View(ordem);
         }
 
@@ -135,7 +157,9 @@ namespace ClienteWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Ordem ordem = db.Ordens.Find(id);
+            var ordem = db.Ordens.Find(id);
+            var itens = ordem.Itens;
+            db.OrdemItens.RemoveRange(itens);
             db.Ordens.Remove(ordem);
             db.SaveChanges();
             return RedirectToAction("Index");
