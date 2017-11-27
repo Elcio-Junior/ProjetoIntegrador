@@ -1,12 +1,23 @@
-﻿CREATE TABLE [dbo].[Servico]
+﻿CREATE TABLE [dbo].[Servico](
+	[ServicoId] [int] IDENTITY(1,1) NOT NULL,
+	[TipoServicoId] [int] NOT NULL,
+	[Descricao] [varchar](150) NOT NULL,
+	[Valor] [decimal](18, 2) NULL,
+ CONSTRAINT [PK_Servico] PRIMARY KEY CLUSTERED 
 (
-	[ServicoId] INT IDENTITY NOT NULL, 
-    [NomeServico] VARCHAR(50) NULL, 
-    [Tipo] VARCHAR(50) NULL, 
-    [Descricao] TEXT NULL, 
-    [DtCriada] NCHAR(10) NULL, 
-    [DtAlterado] NCHAR(10) NULL, 
-    [Valor] FLOAT NULL,
+	[ServicoId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-    CONSTRAINT [PK_Servico] PRIMARY KEY CLUSTERED ([ServicoId] ASC)
-);
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Servico]  WITH CHECK ADD  CONSTRAINT [FK_Servico_TipoServico] FOREIGN KEY([TipoServicoId])
+REFERENCES [dbo].[TipoServico] ([TipoServicoId])
+GO
+
+ALTER TABLE [dbo].[Servico] CHECK CONSTRAINT [FK_Servico_TipoServico]
+GO
+

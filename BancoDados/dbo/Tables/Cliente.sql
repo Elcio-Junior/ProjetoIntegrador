@@ -1,9 +1,14 @@
-﻿CREATE TABLE [dbo].[Cliente] (
-    [ClienteId]        INT            IDENTITY (1, 1) NOT NULL,
-    [Nome]      NVARCHAR (255) NULL,
-    [Endereco]  TEXT           NULL,
-    [Telefone]  NVARCHAR (50)  NULL,
-    [Documento] NVARCHAR (14)  NULL,
-    CONSTRAINT [PK_Cliente] PRIMARY KEY CLUSTERED ([ClienteId] ASC)
-);
+﻿CREATE TABLE [dbo].[Cliente](
+	[ClienteId] [int] IDENTITY(1,1) NOT NULL,
+	[Nome] [nvarchar](255) NOT NULL,
+	[Endereco] [text] NULL,
+	[Telefone] [nvarchar](50) NOT NULL,
+	[CNPJ] [nvarchar](20) NULL,
+	[CPF] [nchar](15) NULL,
+ CONSTRAINT [PK_Cliente] PRIMARY KEY CLUSTERED 
+(
+	[ClienteId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
+GO

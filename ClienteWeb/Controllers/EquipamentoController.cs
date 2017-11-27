@@ -88,8 +88,23 @@ namespace ClienteWeb.Controllers
         {
             try
             {
-                service.Update(id, entity);
-                return RedirectToAction("Index");
+                var result = service.Get(id);
+
+                if (ModelState.IsValid && result != null)
+                {
+                    result.Ano = entity.Ano;
+                    result.ClienteId = entity.ClienteId;
+                    result.Modelo = entity.Modelo;
+                    result.NumeroSerie = entity.NumeroSerie;
+                    result.Tipo = entity.Tipo;
+
+                    service.Update(id, result);
+                    return RedirectToAction("Index");
+                }
+                else{
+                    return RedirectToAction("Shared/Erro");
+                }
+                
             }
             catch (Exception e)
             {

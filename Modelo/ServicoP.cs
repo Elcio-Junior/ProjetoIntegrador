@@ -15,8 +15,8 @@ namespace Modelo
         [DisplayAttribute(Name = "Descrição")]
         public string Descricao { get; set; }
 
-        [Required]
-        public double Valor { get; set; }
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
+        public decimal Valor { get; set; }
 
         #region Relacionamentos
 
