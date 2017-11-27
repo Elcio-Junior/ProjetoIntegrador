@@ -25,6 +25,7 @@ namespace Modelo
         public string Descricao { get; set; }
 
         #region Relacionamentos
+
         // Relacionamento Tabela Cliente
         public virtual int ClienteId { get; set; }
 

@@ -1,0 +1,68 @@
+﻿using Modelo;
+using Servico;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Data.Entity;
+
+namespace ClienteWeb.Controllers
+{
+    public class OrdemItemController : Controller
+    {
+        private Contexto db = new Contexto();
+
+        public ActionResult ListarItens(int id)
+        {
+            var lista = db.OrdemItens
+                .Include(n => n.Ordem)
+                .Include(n => n.ServicoP)
+                .Where(m => m.Ordem.Id == id);
+
+            ViewBag.OrdemId = id;
+            ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
+
+            return PartialView(lista);
+        }
+        
+        public ActionResult SalvarItens(
+            int quantidade, 
+            int servicoId, 
+            decimal valor, 
+            int ordemId)
+        {
+
+            var item = new OrdemItem()
+            {
+                //OrdemId = ordemId,
+                ServicoId = servicoId,
+                Quantidade = quantidade,
+                Valor = valor,
+                Ordem = db.Ordens.Find(ordemId)
+            };
+
+            db.OrdemItens.Add(item);
+            db.SaveChanges();
+
+            return Json(new { Resultado = item.Id }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Excluir(int id)
+        {
+            var result = false;
+            var item = db.OrdemItens.Find(id);
+
+            if (item != null)
+            {
+                db.OrdemItens.Remove(item);
+                db.SaveChanges();
+                result = true;
+            }
+
+            return Json(new { Resultado = result }, JsonRequestBehavior.AllowGet);
+        }
+
+    }
+}
