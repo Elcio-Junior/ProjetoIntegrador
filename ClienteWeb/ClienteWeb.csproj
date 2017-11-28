@@ -196,6 +196,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdemController.cs" />
     <Compile Include="Controllers\OrdemItemController.cs" />
+    <Compile Include="Controllers\ServicoPController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -596,6 +597,7 @@
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Ordem\Edit.cshtml" />
     <Content Include="Views\OrdemItem\ListarItens.cshtml" />
+    <Content Include="Views\ServicoP\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

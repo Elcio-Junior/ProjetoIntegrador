@@ -17,7 +17,7 @@ namespace Modelo
         public int Id { get; set; }
 
         [Required]
-        [DisplayAttribute(Name = "Descrição")]
+        [DisplayAttribute(Name = "Tipo")]
         public string Descricao { get; set; }
     }
 }

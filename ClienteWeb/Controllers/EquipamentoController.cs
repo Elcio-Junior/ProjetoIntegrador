@@ -122,11 +122,12 @@ namespace ClienteWeb.Controllers
 
         // POST: Equipamento/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Equipamento model)
         {
             try
             {
                 // TODO: Add delete logic here
+                //clienteService.Get(model.ClienteId);
                 service.Delete(id);
                 return RedirectToAction("Index");
             }
