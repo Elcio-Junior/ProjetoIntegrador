@@ -644,10 +644,12 @@
     <Content Include="Views\Ordem\Edit.cshtml" />
     <Content Include="Views\OrdemItem\ListarItens.cshtml" />
     <Content Include="Views\ServicoP\Index.cshtml" />
+    <Content Include="Views\ServicoP\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Log\" />
+    <Folder Include="Views\TipoServicoes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
