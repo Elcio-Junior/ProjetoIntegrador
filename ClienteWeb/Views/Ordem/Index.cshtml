@@ -19,14 +19,15 @@
             @Html.DisplayNameFor(model => model.Descricao)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Abertura)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fechamento)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Equipamento.Modelo)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Abertura)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Fechamento)
+        </th>*@
+       
         <th>
             Imprimir
         </th>
@@ -46,14 +47,15 @@
                 @Html.DisplayFor(modelItem => item.Descricao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Abertura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fechamento)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Equipamento.Modelo)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Abertura)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Fechamento)
+            </td>*@
+            
             <td>
                 @Html.ActionLink("Imprimir", "ImprimirOS", "OrdemReport", new { OrdemId = item.Id }, new { target = "_blank" })
             </td>
