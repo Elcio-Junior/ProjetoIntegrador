@@ -29,9 +29,7 @@ namespace ClienteWeb.Controllers
         // GET: Ordem
         public ActionResult Index()
         {
-            //var ordems = db.Ordems.Include(o => o.cliente);
-            //return View(ordems.ToList());
-            var lista = ordemService.Load().Include(x => x.Cliente).Include(x=>x.Equipamento);
+            var lista = db.Ordens.AsNoTracking().Include(n => n.Cliente).Include(n => n.Equipamento).ToList();
             return View(lista);
         }
 
@@ -45,29 +43,28 @@ namespace ClienteWeb.Controllers
         // GET: Ordem/Create
         public ActionResult Create()
         {
-            ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome");
-            ViewBag.EquipamentoId = new SelectList(db.Equipamentos, "Id", "Modelo");
-            ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
+            //ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome");
+            //ViewBag.EquipamentoId = new SelectList(db.Equipamentos, "Id", "Modelo");
+            //ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
+
+            CarregarViewBag();
 
             return View();
         }
 
-        //private void CarregarViewBag(int clienteId)
-        //{
-        //    var equipamentos = db.Equipamentos.Where(n => n.ClienteId == clienteId).ToList();
-
-        //    ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome");
-        //    ViewBag.EquipamentoId = new SelectList(equipamentos, "Id", "Modelo");
-        //    ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
-        //}
-
         public JsonResult ListaEquipamentos(int clienteId)
         {
-            //var telefones = (from u in model.telefones where u.ClienteID select u.telefone).toList(); //Nesse caso estou usando uma tabela ficticia com os telefones do cliente cadastrado
+            var equipamentos = db.Equipamentos.AsNoTracking().Where(n => n.ClienteId == clienteId).ToList();
 
-            var equipamentos = db.Equipamentos.Where(n => n.ClienteId == clienteId).ToList();
+            var lista = equipamentos.Select(n => new
+            {
+                n.Id,
+                n.Modelo,
+                n.NumeroSerie
+            })
+            .ToList();
 
-            return Json(equipamentos, JsonRequestBehavior.AllowGet);
+            return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Ordem/Create
@@ -75,19 +72,33 @@ namespace ClienteWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Ordem ordem)
         {
-            if (ordem?.Id == 0)
+            try
             {
-                ordem.Abertura = DateTime.Now;
-                db.Ordens.Add(ordem);
-                db.SaveChanges();
-                return RedirectToAction("Edit", new { id = ordem.Id });
+                if (ordem?.Id == 0)
+                {
+                    ordem.Abertura = DateTime.Now;
+                    db.Ordens.Add(ordem);
+                    db.SaveChanges();
+                    return RedirectToAction("Edit", new { id = ordem.Id });
+                }
+            }
+            catch
+            {
+                CarregarViewBag(ordem);
+                return View();
             }
 
-            ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome", ordem.ClienteId);
-            ViewBag.EquipamentoId = new SelectList(db.Equipamentos, "Id", "Modelo", ordem.EquipamentoId);
-            ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
 
-            //return Json(new { Resultado = ordem.Id }, JsonRequestBehavior.AllowGet);
+
+            //if (ordem?.Id == 0)
+            //{
+            //    ordem.Abertura = DateTime.Now;
+            //    db.Ordens.Add(ordem);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Edit", new { id = ordem.Id });
+            //}
+
+            //CarregarViewBag(ordem);
 
             return View();
         }
@@ -102,13 +113,11 @@ namespace ClienteWeb.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome", ordem.ClienteId);
-            ViewBag.EquipamentoId = new SelectList(db.Equipamentos, "Id", "Modelo", ordem.EquipamentoId);
-            ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
+            CarregarViewBag(ordem);
 
             return View(ordem);
         }
-
+                
         // POST: Ordem/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -124,15 +133,59 @@ namespace ClienteWeb.Controllers
                 item.EquipamentoId = ordem.EquipamentoId;
                 item.Descricao = ordem.Descricao;
                 db.SaveChanges();
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
-            ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome", ordem.ClienteId);
-            ViewBag.EquipamentoId = new SelectList(db.Equipamentos, "Id", "Modelo", ordem.EquipamentoId);
-            ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
+            CarregarViewBag(ordem);
 
             return View(ordem);
         }
+
+        private void CarregarViewBag(Ordem ordem = null)
+        {
+            CarregarClientesNaViewBag(ordem);
+            CarregarEquipametosNaViewBag(ordem);
+
+            if (ordem != null)
+                CarregarServicosNaViewBag();
+        }
+
+        private void CarregarClientesNaViewBag(Ordem ordem = null)
+        {
+            var clientes = new List<Cliente>
+            {
+                //new Cliente { Nome = "Escolha um cliente..." }
+            };
+
+            var lista = db.Clientes.AsNoTracking().ToList();
+            clientes.AddRange(lista);
+
+            ViewBag.Clientes = clientes;
+            ViewBag.ClienteId = new SelectList(clientes, "Id", "Nome", ordem?.ClienteId);
+        }
+
+        private void CarregarEquipametosNaViewBag(Ordem ordem = null)
+        {
+            var equipamentos = new List<Equipamento>
+            {
+                //new Equipamento { Modelo = "Escolha um equipamento..." }
+            };
+
+            if (ordem?.ClienteId > 0)
+            {
+                var lista = db.Equipamentos.AsNoTracking().Where(n => n.ClienteId == ordem.ClienteId).ToList();
+                equipamentos.AddRange(lista);
+            }
+
+            ViewBag.Equipamentos = equipamentos;
+            ViewBag.EquipamentoId = new SelectList(equipamentos, "Id", "Modelo", ordem?.EquipamentoId);
+        }
+
+        private void CarregarServicosNaViewBag()
+        {
+            ViewBag.ServicoId = new SelectList(db.Servicos.AsNoTracking(), "Id", "Descricao");
+        }
+
 
         // GET: Ordem/Delete/5
         public ActionResult Delete(int? id)
@@ -148,7 +201,7 @@ namespace ClienteWeb.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             return View(ordem);
         }
 

@@ -1,4 +1,6 @@
-﻿@model Modelo.Ordem
+﻿@using Modelo
+
+@model Modelo.Ordem
 
 @{
     ViewBag.Title = "Ordem de Serviço";
@@ -18,7 +20,17 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Cliente.Nome, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.DropDownList("ClienteId", null, htmlAttributes: new { @class = "form-control" })
+                @*@Html.DropDownList("ClienteId", null, htmlAttributes: new { @class = "form-control select2" })*@
+
+                @Html.DropDownListFor(model => model.ClienteId,
+                    ((IEnumerable<Cliente>)ViewBag.Clientes).Select(option => new SelectListItem
+                    {
+                        Text = option.Id + " - " + option.Nome,
+                        Value = option.Id.ToString(),
+                        Selected = (Model != null) && (option.Id == Model.ClienteId)
+                    }), "Escolha um cliente...", new { @class = "form-control select2" })
+
+
                 @Html.ValidationMessageFor(model => model.ClienteId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -26,7 +38,17 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Equipamento, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.DropDownList("EquipamentoId", null, htmlAttributes: new { @class = "form-control" })
+                @*@Html.DropDownList("EquipamentoId", null, htmlAttributes: new { @class = "form-control select2" })*@
+
+                @Html.DropDownListFor(model => model.EquipamentoId,
+                    ((IEnumerable<Equipamento>)ViewBag.Equipamentos).Select(option => new SelectListItem
+                    {
+                        Text = option.Modelo + " - " + option.NumeroSerie,
+                        Value = option.Id.ToString(),
+                        Selected = (Model != null) && (option.Id == Model.EquipamentoId)
+                    }), "Escolha um equipamento...", new { @class = "form-control select2" })
+
+
                 @Html.ValidationMessageFor(model => model.EquipamentoId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -38,7 +60,6 @@
                 @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
             </div>
         </div>
-
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-1">
@@ -60,31 +81,26 @@
     <script type="text/javascript" language="javascript">
         $(function () {
 
-            $('#clienteId').change(function () {
-                var clienteID = $(this).val();
+            $('.select2').select2();
+                        
+            $('#ClienteId').change(function () {
 
-                $.get('/Ordem/ListaEquipamentos', { clienteId: clienteId }).done(function (data) {
-                    var drop = $('#EquipamentoId');
-                    drop.html("");
+                var clienteId = $(this).val();
+
+                var drop = $('#EquipamentoId');
+                drop.html("");
+                drop.append('<option value="">Escolha um equipamento...</option>');
+
+                $.get('@Url.Action("", "Ordem")/ListaEquipamentos', { clienteId: clienteId }).done(function (data) {
                     $.each(data, function (i, item) {
-                        drop.append('<option val="' + item + '">' + item + '</option>');
+                        drop.append('<option value="' + item.Id + '">' + item.Modelo + ' - ' + item.NumeroSerie + '</option>');
                     });
                 });
-            });
-
-                //$('input[type=datetime]').datepicker({
-                //    dateFormat: 'dd/mm/yy',
-                //    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-                //    dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-                //    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-                //    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-                //    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                //    nextText: 'Proximo',
-                //    prevText: 'Anterior'
-                //})
 
             });
-        </script>
+            
+        });
+    </script>
 
 
 }
