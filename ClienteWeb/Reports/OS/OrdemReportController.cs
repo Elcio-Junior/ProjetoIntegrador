@@ -34,17 +34,17 @@ namespace ClienteWeb.Reports.OS
             localReport.SetParameters(new ReportParameter("Abertura", ordem.Abertura.ToString("dd/MM/yyyy")));
             localReport.SetParameters(new ReportParameter("Fechamento", ordem.Fechamento?.ToString("dd/MM/yyyy")));
             localReport.SetParameters(new ReportParameter("Equipamento", ordem.Equipamento?.Modelo));
-            localReport.SetParameters(new ReportParameter("Total", itens.Sum(n => n.Valor).ToString()));
+            localReport.SetParameters(new ReportParameter("Total", itens.Sum(n=>n.Valor * n.Quantidade).ToString()));
 
             var lista = itens.Select(n => new OrdemItemModelReport
             {
                 OrdemItemId = n.Id,
                 Quantidade = n.Quantidade,
-                Valor = n.Valor,
+                Valor = n.Valor*(n.Quantidade),
 
                 ServicoId = n.ServicoId,
                 Descricao = n.ServicoP.Descricao,
-                ValorUnitario = n.ServicoP.Valor
+                ValorUnitario = n.Valor
             });
             
             localReport.DataSources.Add(new ReportDataSource("DataSet1", lista));
