@@ -81,6 +81,7 @@
                     @Html.DisplayFor(modelItem => item.Total)
                 </td>
             </tr>
+
         }
         
     </table>
@@ -88,5 +89,6 @@
 </div>
 <p>
     @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Voltar", "Index")
+    @Html.ActionLink("Voltar", "Index") |
+    @Html.ActionLink("Finalizar", "FinalizarOrdem", new { id = Model.Id })
 </p>

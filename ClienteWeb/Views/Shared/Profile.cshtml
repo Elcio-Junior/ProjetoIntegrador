@@ -14,25 +14,29 @@
         </li>
         <!-- Menu Body -->
         @*<li class="user-body">
-            <div class="row">
-                <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
+                <div class="row">
+                    <div class="col-xs-4 text-center">
+                        <a href="#">Followers</a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <a href="#">Sales</a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <a href="#">Friends</a>
+                    </div>
                 </div>
-                <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                </div>
-                <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                </div>
-            </div>
-        </li>*@
+            </li>*@
         <!-- Menu Footer-->
         <li class="user-footer">
             <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat"><i class="fa fa-user"></i>&nbsp;Perfil</a>
+                @using (@Html.BeginForm("Register", "Account", new { Area = "" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <button class="btn btn-default btn-flat"><i class="fa fa-user"></i>&nbsp;Perfil</button>
+                }
             </div>
             <div class="pull-right">
-                @using (Html.BeginForm("LogOff", "Account",new{Area =""}))
+                @using (Html.BeginForm("LogOff", "Account", new { Area = "" }))
                 {
                     @Html.AntiForgeryToken()
                     <button class="btn btn-default btn-flat" type="submit"><i class="fa fa-sign-out"></i>&nbsp;Sair</button>

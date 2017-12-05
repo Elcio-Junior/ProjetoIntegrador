@@ -23,9 +23,12 @@ namespace ClienteWeb.Controllers
 
             ViewBag.OrdemId = id;
             ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
+            ViewBag.TotalItens = lista.Sum(n => n.Valor * n.Quantidade);
+
             foreach (var item in lista)
             {
                 item.Total = item.Valor * (item.Quantidade);
+
             }
             ViewBag.TotalItens = lista.Sum(n => n.Valor * n.Quantidade);
 
@@ -69,6 +72,5 @@ namespace ClienteWeb.Controllers
 
             return Json(new { Resultado = result }, JsonRequestBehavior.AllowGet);
         }
-
     }
 }

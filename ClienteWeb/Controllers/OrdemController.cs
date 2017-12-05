@@ -239,20 +239,18 @@ namespace ClienteWeb.Controllers
             base.Dispose(disposing);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult FinalizarOrdem(Ordem ordem)
+        public ActionResult FinalizarOrdem(int id)
         {
-            var item = db.Ordens.Find(ordem.Id);
+            var item = db.Ordens.Find(id);
 
             if (ModelState.IsValid && item != null)
             {
                 item.Fechamento = DateTime.Now;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("index");
             }
+            return HttpNotFound();
 
-            return View(ordem);
         }
     }
 }
