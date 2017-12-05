@@ -20,11 +20,14 @@ namespace Modelo
         public string Endereco { get; set; }
 
         [Required]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:(##) #####-####}")]
         [DisplayAttribute(Name = "Telefone")]
         public string Telefone { get; set; }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:###.###.###/####-##}")]
         public string CNPJ{ get; set; }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:###.###.###-##}")]
         public string CPF { get; set; }
 
         // Cliente pode ter Coleção de Equipamentos 
