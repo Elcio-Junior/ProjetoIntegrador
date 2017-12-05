@@ -1,64 +1,48 @@
 ﻿@model Modelo.Ordem
-
 @{
     ViewBag.Title = "Ordem de Serviço";
     ViewBag.Subtitle = "Detalhes";
 }
-
 <div>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Id)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Id)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Cliente.Nome)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Cliente.Nome)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Descricao)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Descricao)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Abertura)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Abertura)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Fechamento)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Fechamento)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Equipamento.Modelo)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Equipamento.Modelo)
         </dd>
-
     </dl>
-
-    <h3>Itens</h3>
-
+    <h3>Itens</h3> 
     <table class="table">
         <tr>
             <th>
@@ -77,9 +61,8 @@
                 Total
             </th>
         </tr>
-
         @foreach (var item in Model.Itens)
-            {
+        {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
@@ -91,16 +74,17 @@
                     @Html.DisplayFor(modelItem => item.Quantidade)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ServicoP.Valor)
+                    @Html.DisplayFor(modelItem => item.Valor)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Valor)
+                    
+                    @Html.DisplayFor(modelItem => item.Total)
                 </td>
             </tr>
         }
-
+        
     </table>
-
+    <h3>Total: R$@ViewBag.totalitem</h3>
 </div>
 <p>
     @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |

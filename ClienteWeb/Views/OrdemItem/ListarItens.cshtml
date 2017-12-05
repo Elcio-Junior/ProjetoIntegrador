@@ -47,30 +47,38 @@
         <th>
             @Html.DisplayNameFor(model => model.Valor)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
 
-    var linha = "tr" + item.Id;
+        var linha = "tr" + item.Id;
 
-    <tr id="@linha">
-        <td>
-            @Html.DisplayFor(modelItem => item.ServicoP.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ServicoP.Descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantidade)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Valor)
-        </td>
-        <td>
-            <a href="#" onclick="ExcluirItem(@item.Id);">Excluir</a>
-        </td>
-    </tr>
-}
+        <tr id="@linha">
+            <td>
+                @Html.DisplayFor(modelItem => item.ServicoP.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServicoP.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                <a href="#" onclick="ExcluirItem(@item.Id);">Excluir</a>
+            </td>
+        </tr>
+    }
 
 </table>
+<h3>Total: R$@ViewBag.TotalItens</h3>
+

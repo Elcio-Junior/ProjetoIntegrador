@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ClienteWeb.Controllers
 {
+    [Authorize]
     public class ServicoPController : Controller
     {
         private Contexto db = new Contexto();

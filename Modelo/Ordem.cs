@@ -24,6 +24,9 @@ namespace Modelo
         [DisplayAttribute(Name = "Descrição")]
         public string Descricao { get; set; }
 
+        [NotMapped]
+        public virtual Decimal Total { get; set; }
+
         #region Relacionamentos
 
         // Relacionamento Tabela Cliente

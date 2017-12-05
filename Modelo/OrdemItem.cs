@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Modelo
@@ -13,6 +14,10 @@ namespace Modelo
         public decimal Valor { get; set; }
 
         public int Quantidade { get; set; }
+
+        [NotMapped]
+        public virtual Decimal Total { get; set; }
+
 
         #region Relacionamentos
         // Relacionamento Tabela Ordem

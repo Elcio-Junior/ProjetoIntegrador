@@ -9,6 +9,7 @@ using System.Data.Entity;
 
 namespace ClienteWeb.Controllers
 {
+    [Authorize]
     public class OrdemItemController : Controller
     {
         private Contexto db = new Contexto();
@@ -22,6 +23,11 @@ namespace ClienteWeb.Controllers
 
             ViewBag.OrdemId = id;
             ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
+            foreach (var item in lista)
+            {
+                item.Total = item.Valor * (item.Quantidade);
+            }
+            ViewBag.TotalItens = lista.Sum(n => n.Valor * n.Quantidade);
 
             return PartialView(lista);
         }

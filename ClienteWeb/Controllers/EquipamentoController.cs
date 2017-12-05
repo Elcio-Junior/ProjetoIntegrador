@@ -126,7 +126,6 @@ namespace ClienteWeb.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
                 //clienteService.Get(model.ClienteId);
                 service.Delete(id);
                 return RedirectToAction("Index");

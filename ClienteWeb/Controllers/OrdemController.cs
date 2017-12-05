@@ -11,6 +11,7 @@ using Servico;
 
 namespace ClienteWeb.Controllers
 {
+    [Authorize]
     public class OrdemController : Controller
     {
         private Contexto db = new Contexto();
@@ -37,6 +38,12 @@ namespace ClienteWeb.Controllers
         public ActionResult Details(int id)
         {
             var list = ordemService.Get(id);
+            foreach (var item in list.Itens)
+            {
+                item.Total = item.Valor * (item.Quantidade);
+                ViewBag.totalitem = db.OrdemItens.Where(n => n.OrdemId == id).Sum(n=> n.Valor *n.Quantidade);
+                
+            }
             return View(list);
         }
 
@@ -117,10 +124,8 @@ namespace ClienteWeb.Controllers
 
             return View(ordem);
         }
-                
+
         // POST: Ordem/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Ordem ordem)
@@ -211,10 +216,17 @@ namespace ClienteWeb.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             var ordem = db.Ordens.Find(id);
+
+            if (ordem == null)
+            {
+                return RedirectToAction("Index");
+            }
+
             var itens = ordem.Itens;
             db.OrdemItens.RemoveRange(itens);
             db.Ordens.Remove(ordem);
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
@@ -225,6 +237,22 @@ namespace ClienteWeb.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult FinalizarOrdem(Ordem ordem)
+        {
+            var item = db.Ordens.Find(ordem.Id);
+
+            if (ModelState.IsValid && item != null)
+            {
+                item.Fechamento = DateTime.Now;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(ordem);
         }
     }
 }
