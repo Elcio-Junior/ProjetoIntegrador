@@ -10,9 +10,11 @@ namespace Modelo
         [Column("OrdemItemId")]
         public int Id { get; set; }
 
+        [Required]
         [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         public decimal Valor { get; set; }
 
+        [Required]
         public int Quantidade { get; set; }
 
         [NotMapped]

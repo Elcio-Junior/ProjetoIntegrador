@@ -22,6 +22,7 @@ namespace Modelo
         public DateTime? Fechamento { get; set; }
 
         [DisplayAttribute(Name = "Descrição")]
+        [Required]
         public string Descricao { get; set; }
 
         [NotMapped]

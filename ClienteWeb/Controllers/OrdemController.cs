@@ -31,7 +31,13 @@ namespace ClienteWeb.Controllers
         public ActionResult Index()
         {
             //busca tabela ordem, incluindo cliente e equipamento
-            var lista = db.Ordens.AsNoTracking().Include(n => n.Cliente).Include(n => n.Equipamento).ToList();
+            var lista = db.Ordens.AsNoTracking().Where(n=> n.Fechamento == null).Include(n => n.Cliente).Include(n => n.Equipamento).ToList();
+            return View(lista);
+        }
+        public ActionResult OrdemFinalizadas()
+        {
+            //busca tabela ordem, incluindo cliente e equipamento
+            var lista = db.Ordens.AsNoTracking().Where(n=>n.Fechamento != null).Include(n => n.Cliente).Include(n => n.Equipamento).ToList();
             return View(lista);
         }
 

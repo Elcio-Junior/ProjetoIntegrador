@@ -15,17 +15,17 @@
             </a>
             <ul class="treeview-menu">
                 <li>
-                    <a href="@(Url.Action("Index","Cliente"))">
+                    <a href="@(Url.Action("Create","Cliente"))">
                         <i class="fa fa-circle-o"></i> <span>Clientes</span>
                     </a>
                 </li>
                 <li>
-                    <a href="@(Url.Action("Index","Equipamento"))">
+                    <a href="@(Url.Action("Create","Equipamento"))">
                         <i class="fa fa-circle-o"></i> <span>Equipamentos</span>
                     </a>
                 </li>
                 <li>
-                    <a href="@(Url.Action("Index","Ordem"))">
+                    <a href="@(Url.Action("Create","Ordem"))">
                         <i class="fa fa-circle-o"></i> <span>Ordem de Serviço</span>
                     </a>
                 </li>
@@ -61,9 +61,8 @@
                 </li>
             </ul>
         </li>
-        <li><a href="@(Url.Action("Index","Ordem"))"><i class="fa fa-circle-o text-red"></i> <span>Ordem de Serviços</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Pensar 1</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Pensar 2</span></a></li>
+        <li><a href="@(Url.Action("Index","Ordem"))"><i class="fa fa-circle-o text-red"></i> <span>Ordem de Serviços Abertas</span></a></li>
+        <li><a href="@(Url.Action("OrdemFinalizadas","Ordem"))"><i class="fa fa-circle-o text-yellow"></i> <span>Ordem de Serviços Fechadas</span></a></li>
         @if (User.IsInRole("Role"))
         {
 
