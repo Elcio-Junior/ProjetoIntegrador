@@ -12,9 +12,11 @@ namespace ClienteWeb.Controllers
     [Authorize]
     public class EquipamentoController : Controller
     {
+        //Estancia as Camadas de serviços
         private EquipamentoService service;
         private ClienteService clienteService;
 
+        // Inicialisa os contrutores
         public EquipamentoController()
         {
             service = new EquipamentoService();
@@ -42,7 +44,7 @@ namespace ClienteWeb.Controllers
             BuscarCliente();
             return View();
         }
-
+        //busco o Cliente e add em uma ViewBag
         private void BuscarCliente()
         {
             Cliente Newblank = new Cliente { Id = 0, Nome = "Selecione o Cliente" };
@@ -62,6 +64,7 @@ namespace ClienteWeb.Controllers
         {
             try
             {
+                //Salvo no Banco
                 service.Save(entity);
                 return RedirectToAction("Index");
             }
@@ -76,8 +79,10 @@ namespace ClienteWeb.Controllers
         // GET: Equipamento/Edit/5
         public ActionResult Edit(int id)
         {
+            //busco equipamento pelo ID 
             var entity =  service.Get(id);
             var returnCliente = clienteService.Load();
+            //Coloco os Clientes em uma ViewBag
             ViewBag.ClienteID = new SelectList(returnCliente, "Id", "Nome",entity.ClienteId);
             return View(entity);
         }
@@ -115,6 +120,7 @@ namespace ClienteWeb.Controllers
         // GET: Equipamento/Delete/5
         public ActionResult Delete(int id)
         {
+            //busco um Equipamento e retorno os detalhes dele na view
             var entity = service.Get(id);
 
             return View(entity);

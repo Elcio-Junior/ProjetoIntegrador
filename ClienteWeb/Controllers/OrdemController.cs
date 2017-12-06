@@ -30,6 +30,7 @@ namespace ClienteWeb.Controllers
         // GET: Ordem
         public ActionResult Index()
         {
+            //busca tabela ordem, incluindo cliente e equipamento
             var lista = db.Ordens.AsNoTracking().Include(n => n.Cliente).Include(n => n.Equipamento).ToList();
             return View(lista);
         }
@@ -41,10 +42,13 @@ namespace ClienteWeb.Controllers
 
             foreach (var item in list.Itens)
             {
+                //em cada iten eu coloco o valor total
                 item.Total = item.Valor * (item.Quantidade);
+                // jogo em uma ViewBag o Valor total Geral
                 ViewBag.totalitem = db.OrdemItens.Where(n => n.OrdemId == id).Sum(n=> n.Valor *n.Quantidade);
                 
             }
+            //retorno OS
             return View(list);
         }
 
@@ -55,6 +59,7 @@ namespace ClienteWeb.Controllers
             //ViewBag.EquipamentoId = new SelectList(db.Equipamentos, "Id", "Modelo");
             //ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
 
+            //chama funcao CarregarViewBag
             CarregarViewBag();
 
             return View();
@@ -62,6 +67,7 @@ namespace ClienteWeb.Controllers
 
         public JsonResult ListaEquipamentos(int clienteId)
         {
+            //busca todos equipamentos por Cliente
             var equipamentos = db.Equipamentos.AsNoTracking().Where(n => n.ClienteId == clienteId).ToList();
 
             var lista = equipamentos.Select(n => new
@@ -92,6 +98,7 @@ namespace ClienteWeb.Controllers
             }
             catch
             {
+                //buscas as ViewBag de Ciente, Equipameno e serviço
                 CarregarViewBag(ordem);
                 return View();
             }
@@ -120,9 +127,11 @@ namespace ClienteWeb.Controllers
             {
                 return HttpNotFound();
             }
-
+            
+            //buscas as ViewBag de Ciente, Equipameno e serviço
             CarregarViewBag(ordem);
 
+            
             return View(ordem);
         }
 
@@ -142,20 +151,23 @@ namespace ClienteWeb.Controllers
                 return RedirectToAction("Index");
             }
 
+            //buscas as ViewBag de Ciente, Equipameno e serviço
             CarregarViewBag(ordem);
 
             return View(ordem);
         }
 
+        ///Este metodos carrega as Todas as ViewBag
         private void CarregarViewBag(Ordem ordem = null)
         {
+            
             CarregarClientesNaViewBag(ordem);
             CarregarEquipametosNaViewBag(ordem);
 
             if (ordem != null)
                 CarregarServicosNaViewBag();
         }
-
+        //carrega ViewBag de Clientes
         private void CarregarClientesNaViewBag(Ordem ordem = null)
         {
             var clientes = new List<Cliente>
@@ -169,7 +181,7 @@ namespace ClienteWeb.Controllers
             ViewBag.Clientes = clientes;
             ViewBag.ClienteId = new SelectList(clientes, "Id", "Nome", ordem?.ClienteId);
         }
-
+        //ViewBag Carrega Equipamentos
         private void CarregarEquipametosNaViewBag(Ordem ordem = null)
         {
             var equipamentos = new List<Equipamento>
@@ -187,6 +199,7 @@ namespace ClienteWeb.Controllers
             ViewBag.EquipamentoId = new SelectList(equipamentos, "Id", "Modelo", ordem?.EquipamentoId);
         }
 
+        //ViewBag carrega serviços
         private void CarregarServicosNaViewBag()
         {
             ViewBag.ServicoId = new SelectList(db.Servicos.AsNoTracking(), "Id", "Descricao");
@@ -231,6 +244,7 @@ namespace ClienteWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        // Liberação de recurso
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -241,6 +255,7 @@ namespace ClienteWeb.Controllers
         }
 
 
+        //Fechar ordem
         public bool Fechar(int ordemId)
         {
             var item = db.Ordens.Find(ordemId);

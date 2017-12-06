@@ -15,6 +15,10 @@ namespace ClienteWeb.Controllers
             service = new ClienteService();
         }
 
+        /// <summary>
+        /// Metodo Lista todos os Clientes
+        /// </summary>
+        /// <returns>Lista de Clientes</returns>
         // GET: Cliente
         public ActionResult Index()
         {
@@ -22,6 +26,11 @@ namespace ClienteWeb.Controllers
             return View(lista);
         }
 
+        /// <summary>
+        /// Detalhes de 1 Cliente
+        /// </summary>
+        /// <param name="id">ID Cliente</param>
+        /// <returns></returns>
         // GET: Cliente/Details/5
         public ActionResult Details(int id)
         {
@@ -35,6 +44,11 @@ namespace ClienteWeb.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Cria um novo Cliente 
+        /// </summary>
+        /// <param name="entity">Objeto do tipo Cliente</param>
+        /// <returns></returns>
         // POST: Cliente/Create
         [HttpPost]
         public ActionResult Create(Cliente entity)
@@ -49,7 +63,12 @@ namespace ClienteWeb.Controllers
                 return View();
             }
         }
-
+        
+        /// <summary>
+        /// Edita o Cliente
+        /// </summary>
+        /// <param name="id">ID Cliente</param>
+        /// <returns></returns>
         // GET: Cliente/Edit/5
         public ActionResult Edit(int id)
         {
@@ -72,6 +91,11 @@ namespace ClienteWeb.Controllers
             }
         }
 
+        /// <summary>
+        /// Deleta um Cliente
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: Cliente/Delete/5
         public ActionResult Delete(int id)
         {
