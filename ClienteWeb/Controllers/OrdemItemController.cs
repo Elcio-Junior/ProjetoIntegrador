@@ -17,17 +17,24 @@ namespace ClienteWeb.Controllers
         public ActionResult ListarItens(int id)
         {
             var lista = db.OrdemItens
+                .AsNoTracking()
                 .Include(n => n.Ordem)
                 .Include(n => n.ServicoP)
-                .Where(m => m.Ordem.Id == id);
+                .Where(m => m.Ordem.Id == id)
+                .ToList();
 
             ViewBag.OrdemId = id;
             ViewBag.ServicoId = new SelectList(db.Servicos, "Id", "Descricao");
+
             foreach (var item in lista)
             {
                 item.Total = item.Valor * (item.Quantidade);
             }
-            ViewBag.TotalItens = lista.Sum(n => n.Valor * n.Quantidade);
+
+            if (lista.Count() > 0)
+                ViewBag.TotalItens = lista.Sum(n => n.Valor * n.Quantidade);
+            else
+                ViewBag.TotalItens = 0;
 
             return PartialView(lista);
         }

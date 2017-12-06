@@ -17,6 +17,20 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Abertura, null, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DisplayFor(model => model.Abertura)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fechamento, null, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DisplayFor(model => model.Fechamento)
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.Cliente.Nome, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
                 @Html.DropDownList("ClienteId", null, htmlAttributes: new { @class = "form-control select2" })
@@ -42,8 +56,12 @@
 
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-1">
+            <div class="col-md-offset-2 col-md-2">
                 <input type="submit" value="Salvar" class="btn btn-default" />
+                @if (Model.Fechamento == null)
+                {
+                    <a href="#" onclick="Fechar(@Model.Id);" class="btn btn-default">Fechar</a>
+                }
             </div>
         </div>
     </div>
@@ -69,7 +87,7 @@
 
             $('.select2').select2();
 
-            
+
 
             $('#ClienteId').change(function () {
 
@@ -87,6 +105,22 @@
             });
 
         });
+
+        function Fechar(ordemId) {
+
+            var url = urlOrdemItem + "/ListarItens";
+
+            $.get('@Url.Action("", "Ordem")/Fechar', { ordemId: ordemId }).done(function (data) {
+
+                if (data) {
+                    window.location.href = '@Url.Action("", "Ordem")/Details/@Model.Id';
+                }
+
+            });
+
+         }
+
+
     </script>
 
 

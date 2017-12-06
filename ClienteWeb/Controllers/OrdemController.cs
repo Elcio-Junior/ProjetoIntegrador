@@ -38,6 +38,7 @@ namespace ClienteWeb.Controllers
         public ActionResult Details(int id)
         {
             var list = ordemService.Get(id);
+
             foreach (var item in list.Itens)
             {
                 item.Total = item.Valor * (item.Quantidade);
@@ -239,20 +240,20 @@ namespace ClienteWeb.Controllers
             base.Dispose(disposing);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult FinalizarOrdem(Ordem ordem)
-        {
-            var item = db.Ordens.Find(ordem.Id);
 
-            if (ModelState.IsValid && item != null)
+        public bool Fechar(int ordemId)
+        {
+            var item = db.Ordens.Find(ordemId);
+
+            if (item != null)
             {
                 item.Fechamento = DateTime.Now;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return true;
             }
 
-            return View(ordem);
+            return false;
         }
+
     }
 }
